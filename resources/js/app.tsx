@@ -11,8 +11,12 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
+        const frontPages = [
+            'welcome', 'TentangKami', 'Anggota', 'Kegiatan', 'Media', 'Dokumen', 'Kontak',
+            'StrukturOrganisasi', 'PendaftaranHimpunan', 'SeminarPelatihan', 'Galeri', 'Jurnal', 'Perpustakaan'
+        ];
         switch (true) {
-            case name === 'welcome':
+            case frontPages.includes(name):
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
