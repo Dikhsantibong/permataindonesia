@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('admin/articles', ArticleController::class);
     Route::resource('admin/gallery', GalleryController::class);
+    Route::resource('admin/events', EventController::class)->names('admin.events');
 });
 
 Route::inertia('/tentang-kami', 'TentangKami')->name('tentang-kami');
