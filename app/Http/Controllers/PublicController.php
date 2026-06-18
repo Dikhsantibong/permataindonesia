@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\GalleryItem;
+use App\Models\Event;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -59,6 +60,46 @@ class PublicController extends Controller
         return Inertia::render('ArticleDetail', [
             'article' => $article,
             'related' => $related,
+        ]);
+    }
+
+    public function kegiatan(\Illuminate\Http\Request $request): Response
+    {
+        $query = Event::whereIn('status', ['upcoming', 'ongoing'])
+            ->where('category', 'Event');
+
+        if ($request->has('type')) {
+            $query->where('event_type', $request->type);
+        }
+
+        $events = $query->orderBy('event_date', 'asc')->paginate(10);
+
+        return Inertia::render('Kegiatan', [
+            'events' => $events,
+            'filters' => $request->only(['type']),
+        ]);
+    }
+
+    public function seminarPelatihan(): Response
+    {
+        $events = Event::whereIn('status', ['upcoming', 'ongoing'])
+            ->whereIn('category', ['Seminar', 'Pelatihan'])
+            ->orderBy('event_date', 'asc')
+            ->paginate(12);
+
+        return Inertia::render('SeminarPelatihan', [
+            'events' => $events,
+        ]);
+    }
+
+    public function eventShow(string $slug): Response
+    {
+        $event = Event::where('slug', $slug)
+            ->with('organizer')
+            ->firstOrFail();
+
+        return Inertia::render('EventDetail', [
+            'event' => $event,
         ]);
     }
 }
