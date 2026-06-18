@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Menu } from 'lucide-react';
+import { Menu, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useState } from 'react';
 
 // Helper component for Desktop Dropdowns
@@ -190,12 +190,136 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
                 {children}
             </main>
 
-            {/* Simple Footer */}
-            <footer className="bg-[#0B1727] py-8 text-white mt-auto">
-                <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-                    <p className="text-sm text-gray-400">
-                        &copy; 2026 Permata Indonesia. All rights reserved.
-                    </p>
+            {/* Professional Footer */}
+            <footer className="bg-[#0B1727] text-white mt-auto">
+                <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        {/* About Section */}
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded bg-[#FACC15] font-bold text-[#0B1727]">
+                                    PI
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold leading-tight tracking-wider">
+                                        PERMATA
+                                    </h3>
+                                    <p className="text-[10px] leading-none text-gray-300">
+                                        INDONESIA
+                                    </p>
+                                </div>
+                            </div>
+                            <p className="text-sm text-gray-400 leading-relaxed">
+                                Wadah Kolaborasi Mahasiswa Pertambangan Indonesia. Bersatu, berkolaborasi, dan berkontribusi untuk kemajuan pertambangan Indonesia yang berkelanjutan.
+                            </p>
+                            <div className="flex gap-4 pt-2">
+                                <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
+                                    <Facebook className="h-5 w-5" />
+                                </a>
+                                <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
+                                    <Instagram className="h-5 w-5" />
+                                </a>
+                                <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
+                                    <Linkedin className="h-5 w-5" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Quick Links */}
+                        <div className="space-y-4">
+                            <h4 className="text-base font-bold text-[#FACC15]">Tautan Cepat</h4>
+                            <ul className="space-y-2 text-sm text-gray-400">
+                                <li>
+                                    <Link href="/tentang-kami" className="hover:text-white transition-colors">
+                                        Tentang Kami
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/kegiatan" className="hover:text-white transition-colors">
+                                        Kegiatan
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/media" className="hover:text-white transition-colors">
+                                        Berita & Artikel
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/galeri" className="hover:text-white transition-colors">
+                                        Galeri
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/dokumen" className="hover:text-white transition-colors">
+                                        Dokumen
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Resources */}
+                        <div className="space-y-4">
+                            <h4 className="text-base font-bold text-[#FACC15]">Sumber Daya</h4>
+                            <ul className="space-y-2 text-sm text-gray-400">
+                                <li>
+                                    <Link href="/jurnal" className="hover:text-white transition-colors">
+                                        Jurnal & Karya Ilmiah
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/perpustakaan" className="hover:text-white transition-colors">
+                                        Perpustakaan Digital
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/pendaftaran-himpunan" className="hover:text-white transition-colors">
+                                        Pendaftaran Himpunan
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/kontak" className="hover:text-white transition-colors">
+                                        Hubungi Kami
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Contact Info */}
+                        <div className="space-y-4">
+                            <h4 className="text-base font-bold text-[#FACC15]">Hubungi Kami</h4>
+                            <ul className="space-y-3 text-sm text-gray-400">
+                                <li className="flex items-start gap-3">
+                                    <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-[#FACC15]" />
+                                    <span>Indonesia</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Mail className="h-5 w-5 flex-shrink-0 text-[#FACC15]" />
+                                    <a href="mailto:info@permata-indonesia.org" className="hover:text-white transition-colors">
+                                        info@permata-indonesia.org
+                                    </a>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Phone className="h-5 w-5 flex-shrink-0 text-[#FACC15]" />
+                                    <span>+62 XXX XXX XXXX</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Bottom Bar */}
+                    <div className="mt-12 border-t border-gray-800 pt-8">
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                            <p>&copy; 2026 Permata Indonesia. All rights reserved.</p>
+                            <div className="flex gap-6">
+                                <Link href="#" className="hover:text-white transition-colors">
+                                    Kebijakan Privasi
+                                </Link>
+                                <Link href="#" className="hover:text-white transition-colors">
+                                    Syarat & Ketentuan
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </div>

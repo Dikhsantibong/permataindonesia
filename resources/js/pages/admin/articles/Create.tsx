@@ -1,5 +1,5 @@
 import { Head, useForm, Link } from '@inertiajs/react';
-import { ArrowLeft, Upload, X } from 'lucide-react';
+import { ArrowLeft, Upload, X, Info, AlertCircle } from 'lucide-react';
 import { type FormEvent, useState, useRef } from 'react';
 import {
     Select,
@@ -18,6 +18,7 @@ interface Props {
         cover_image: string | null;
         category: 'berita' | 'artikel';
         status: 'draft' | 'published';
+        tags?: string;
     };
 }
 
@@ -35,6 +36,7 @@ export default function ArticleForm({ article }: Props) {
         cover_image: null as File | null,
         category: article?.category || 'berita',
         status: article?.status || 'draft',
+        tags: article?.tags || '',
     });
 
     function handleSubmit(e: FormEvent) {
@@ -87,6 +89,23 @@ export default function ArticleForm({ article }: Props) {
                     </div>
                 </div>
 
+                {/* Writing Guidelines */}
+                <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
+                    <div className="flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                        <div className="text-sm text-gray-700 dark:text-gray-300">
+                            <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">Panduan Penulisan Standar</h3>
+                            <ul className="space-y-1.5 list-disc list-inside">
+                                <li><strong>Berita:</strong> Faktual, objektif, berdasarkan kejadian nyata, gunakan gaya bahasa jurnalistik (inverted pyramid)</li>
+                                <li><strong>Artikel:</strong> Analisis mendalam, opini terstruktur, edukatif, gunakan sub-heading untuk pembagian topik</li>
+                                <li>Gunakan bahasa baku, hindari slang atau singkatan yang tidak umum</li>
+                                <li>Sertakan sumber atau referensi jika mengutip data atau pernyataan</li>
+                                <li>Minimal 300 karakter untuk konten agar optimal untuk SEO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-3">
                     {/* Main Content - 2 cols */}
@@ -101,8 +120,16 @@ export default function ArticleForm({ article }: Props) {
                                 value={data.title}
                                 onChange={(e) => setData('title', e.target.value)}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                                placeholder="Masukkan judul artikel..."
+                                placeholder="Contoh: PERMATA Indonesia Gelar MUNAS 2026 di Jakarta"
+                                maxLength={200}
                             />
+                            <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
+                                <span>{data.title.length}/200 karakter</span>
+                                <div className="flex items-center gap-1 text-blue-600">
+                                    <Info className="h-3 w-3" />
+                                    <span>Gunakan judul yang jelas, informatif, dan mengandung kata kunci utama</span>
+                                </div>
+                            </div>
                             {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title}</p>}
                         </div>
 
@@ -116,9 +143,16 @@ export default function ArticleForm({ article }: Props) {
                                 onChange={(e) => setData('excerpt', e.target.value)}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                                 rows={3}
-                                placeholder="Ringkasan singkat dari artikel (opsional)..."
+                                placeholder="Tulis ringkasan singkat yang menarik pembaca untuk membaca selengkapnya..."
                                 maxLength={500}
                             />
+                            <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
+                                <span>{data.excerpt.length}/500 karakter</span>
+                                <div className="flex items-center gap-1 text-blue-600">
+                                    <Info className="h-3 w-3" />
+                                    <span>Ringkasan harus menjawab: apa, siapa, kapan, di mana, mengapa</span>
+                                </div>
+                            </div>
                             {errors.excerpt && <p className="mt-1 text-sm text-red-500">{errors.excerpt}</p>}
                         </div>
 
@@ -132,8 +166,15 @@ export default function ArticleForm({ article }: Props) {
                                 onChange={(e) => setData('content', e.target.value)}
                                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                                 rows={15}
-                                placeholder="Tulis konten artikel Anda di sini..."
+                                placeholder="Tulis konten artikel dengan struktur yang baik:&#10;&#10;1. Pendahuluan - Jelaskan latar belakang dan tujuan&#10;2. Isi - Bagi menjadi sub-bagian dengan heading&#10;3. Kesimpulan - Ringkas poin-poin penting&#10;&#10;Gunakan bahasa yang jelas, objektif, dan mudah dipahami."
                             />
+                            <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
+                                <span>{data.content.length} karakter</span>
+                                <div className="flex items-center gap-1 text-blue-600">
+                                    <Info className="h-3 w-3" />
+                                    <span>Minimal 300 karakter. Gunakan paragraf pendek dan heading untuk kemudahan membaca</span>
+                                </div>
+                            </div>
                             {errors.content && <p className="mt-1 text-sm text-red-500">{errors.content}</p>}
                         </div>
                     </div>
@@ -197,6 +238,13 @@ export default function ArticleForm({ article }: Props) {
                                             <SelectItem value="artikel">Artikel</SelectItem>
                                         </SelectContent>
                                     </Select>
+                                    <div className="mt-2 flex items-start gap-1 text-xs text-gray-500">
+                                        <Info className="h-3 w-3 mt-0.5 text-blue-600 flex-shrink-0" />
+                                        <span>
+                                            <strong>Berita:</strong> Laporan kejadian aktual, faktual, dan terkini<br/>
+                                            <strong>Artikel:</strong> Tulisan opini, analisis, atau edukasi yang lebih mendalam
+                                        </span>
+                                    </div>
                                     {errors.category && <p className="mt-1 text-sm text-red-500">{errors.category}</p>}
                                 </div>
 
@@ -216,7 +264,32 @@ export default function ArticleForm({ article }: Props) {
                                             <SelectItem value="published">Published</SelectItem>
                                         </SelectContent>
                                     </Select>
+                                    <div className="mt-2 flex items-start gap-1 text-xs text-gray-500">
+                                        <Info className="h-3 w-3 mt-0.5 text-blue-600 flex-shrink-0" />
+                                        <span>
+                                            <strong>Draft:</strong> Simpan sebagai draf untuk diedit nanti<br/>
+                                            <strong>Published:</strong> Langsung tayang di website
+                                        </span>
+                                    </div>
                                     {errors.status && <p className="mt-1 text-sm text-red-500">{errors.status}</p>}
+                                </div>
+
+                                <div>
+                                    <label className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                        Tags
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={data.tags}
+                                        onChange={(e) => setData('tags', e.target.value)}
+                                        className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        placeholder="contoh: munas, pertambangan, mahasiswa"
+                                    />
+                                    <div className="mt-2 flex items-start gap-1 text-xs text-gray-500">
+                                        <Info className="h-3 w-3 mt-0.5 text-blue-600 flex-shrink-0" />
+                                        <span>Pisahkan dengan koma. Gunakan 3-5 tags yang relevan untuk SEO</span>
+                                    </div>
+                                    {errors.tags && <p className="mt-1 text-sm text-red-500">{errors.tags}</p>}
                                 </div>
                             </div>
                         </div>
