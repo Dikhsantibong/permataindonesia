@@ -13,7 +13,8 @@ createInertiaApp({
     layout: (name) => {
         const frontPages = [
             'welcome', 'TentangKami', 'Anggota', 'Kegiatan', 'Media', 'Dokumen', 'Kontak',
-            'StrukturOrganisasi', 'PendaftaranHimpunan', 'SeminarPelatihan', 'Galeri', 'Jurnal', 'Perpustakaan'
+            'StrukturOrganisasi', 'PendaftaranHimpunan', 'SeminarPelatihan', 'Galeri', 'Jurnal', 'Perpustakaan',
+            'ArticleDetail'
         ];
         switch (true) {
             case frontPages.includes(name):
