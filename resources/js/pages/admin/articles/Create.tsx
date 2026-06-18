@@ -1,6 +1,13 @@
 import { Head, useForm, Link } from '@inertiajs/react';
 import { ArrowLeft, Upload, X } from 'lucide-react';
 import { type FormEvent, useState, useRef } from 'react';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 interface Props {
     article?: {
@@ -178,14 +185,18 @@ export default function ArticleForm({ article }: Props) {
                                     <label className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300">
                                         Kategori <span className="text-red-500">*</span>
                                     </label>
-                                    <select
+                                    <Select
                                         value={data.category}
-                                        onChange={(e) => setData('category', e.target.value as 'berita' | 'artikel')}
-                                        className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        onValueChange={(value) => setData('category', value as 'berita' | 'artikel')}
                                     >
-                                        <option value="berita">Berita</option>
-                                        <option value="artikel">Artikel</option>
-                                    </select>
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Pilih kategori" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="berita">Berita</SelectItem>
+                                            <SelectItem value="artikel">Artikel</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                     {errors.category && <p className="mt-1 text-sm text-red-500">{errors.category}</p>}
                                 </div>
 
@@ -193,14 +204,18 @@ export default function ArticleForm({ article }: Props) {
                                     <label className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-300">
                                         Status <span className="text-red-500">*</span>
                                     </label>
-                                    <select
+                                    <Select
                                         value={data.status}
-                                        onChange={(e) => setData('status', e.target.value as 'draft' | 'published')}
-                                        className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 transition-colors focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15]/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                        onValueChange={(value) => setData('status', value as 'draft' | 'published')}
                                     >
-                                        <option value="draft">Draft</option>
-                                        <option value="published">Published</option>
-                                    </select>
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Pilih status" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="draft">Draft</SelectItem>
+                                            <SelectItem value="published">Published</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                     {errors.status && <p className="mt-1 text-sm text-red-500">{errors.status}</p>}
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('admin/articles', ArticleController::class);
     Route::resource('admin/gallery', GalleryController::class);
