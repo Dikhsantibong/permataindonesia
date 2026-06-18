@@ -9,7 +9,21 @@ import {
     Navigation
 } from 'lucide-react';
 
-export default function Welcome() {
+interface Article {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    cover_image: string | null;
+    category: string;
+    published_at: string;
+}
+
+interface Props {
+    recentArticles: Article[];
+}
+
+export default function Welcome({ recentArticles }: Props) {
     return (
         <FrontLayout>
             <Head title="Beranda | Permata Indonesia" />
@@ -195,25 +209,47 @@ export default function Welcome() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-4">
-                    {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="group cursor-pointer">
-                            <div className="mb-3 aspect-video w-full overflow-hidden rounded-lg bg-gray-200">
-                                <img
-                                    src={`https://images.unsplash.com/photo-${1500000000000 + i}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
-                                    alt="News thumbnail"
-                                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
-                            </div>
-                            <div className="flex items-center gap-2 text-xs font-semibold text-[#FACC15]">
-                                <span>BERITA</span>
-                                <span className="h-1 w-1 rounded-full bg-gray-300"></span>
-                                <span className="text-gray-500">12 Mei 2026</span>
-                            </div>
-                            <h4 className="mt-2 text-sm font-bold leading-tight text-[#0B1727] group-hover:text-blue-700">
-                                Munas Permata Indonesia 2026 Siap Digelar
-                            </h4>
+                    {recentArticles.length > 0 ? (
+                        recentArticles.map((article) => (
+                            <Link
+                                key={article.id}
+                                href={`/media/${article.slug}`}
+                                className="group cursor-pointer"
+                            >
+                                <div className="mb-3 aspect-video w-full overflow-hidden rounded-lg bg-gray-200">
+                                    {article.cover_image ? (
+                                        <img
+                                            src={`/storage/${article.cover_image}`}
+                                            alt={article.title}
+                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <div className="flex h-full w-full items-center justify-center bg-gray-300">
+                                            <span className="text-gray-500">No Image</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex items-center gap-2 text-xs font-semibold text-[#FACC15]">
+                                    <span>{article.category.toUpperCase()}</span>
+                                    <span className="h-1 w-1 rounded-full bg-gray-300"></span>
+                                    <span className="text-gray-500">
+                                        {new Date(article.published_at).toLocaleDateString('id-ID', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric'
+                                        })}
+                                    </span>
+                                </div>
+                                <h4 className="mt-2 text-sm font-bold leading-tight text-[#0B1727] group-hover:text-blue-700">
+                                    {article.title}
+                                </h4>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="col-span-4 text-center py-8 text-gray-500">
+                            Belum ada berita yang diterbitkan
                         </div>
-                    ))}
+                    )}
                 </div>
             </section>
         </FrontLayout>

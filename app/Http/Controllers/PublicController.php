@@ -9,6 +9,18 @@ use Inertia\Response;
 
 class PublicController extends Controller
 {
+    public function index(): Response
+    {
+        $recentArticles = Article::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->limit(4)
+            ->get();
+
+        return Inertia::render('welcome', [
+            'recentArticles' => $recentArticles,
+        ]);
+    }
+
     public function media(): Response
     {
         $articles = Article::where('status', 'published')

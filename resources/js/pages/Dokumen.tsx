@@ -32,33 +32,11 @@ export default function Dokumen() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {[
-                                    { kat: 'AD/ART', nama: 'AD/ART PERMATA Indonesia', desc: 'Anggaran Dasar dan Anggaran Rumah Tangga' },
-                                    { kat: 'GBHO', nama: 'GBHO PERMATA Indonesia', desc: 'Garis Besar Haluan Organisasi PERMATA Indonesia' },
-                                    { kat: 'SOP', nama: 'SOP Organisasi', desc: 'Standar Operasional Prosedur PERMATA Indonesia' },
-                                    { kat: 'Tata Tertib', nama: 'Tata Tertib Organisasi', desc: 'Tata Tertib dalam Pelaksanaan Kegiatan Organisasi' }
-                                ].map((doc, idx) => (
-                                    <tr key={idx} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                                {doc.kat}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="text-sm font-bold text-gray-900">{doc.nama}</div>
-                                        </td>
-                                        <td className="px-6 py-4 hidden md:table-cell text-sm text-gray-500">
-                                            {doc.desc}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                            <a href="#" className="text-[#0B1727] hover:text-[#FACC15] inline-flex items-center">
-                                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                                </svg>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                ))}
+                                <tr>
+                                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
+                                        Belum ada dokumen yang tersedia
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
