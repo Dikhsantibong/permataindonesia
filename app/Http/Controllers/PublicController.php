@@ -17,8 +17,14 @@ class PublicController extends Controller
             ->limit(4)
             ->get();
 
+        $upcomingEvents = Event::whereIn('status', ['upcoming', 'ongoing'])
+            ->orderBy('event_date', 'asc')
+            ->limit(3)
+            ->get();
+
         return Inertia::render('welcome', [
             'recentArticles' => $recentArticles,
+            'upcomingEvents' => $upcomingEvents,
         ]);
     }
 

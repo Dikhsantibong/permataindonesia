@@ -19,11 +19,22 @@ interface Article {
     published_at: string;
 }
 
-interface Props {
-    recentArticles: Article[];
+interface EventItem {
+    id: number;
+    title: string;
+    slug: string;
+    cover_image: string | null;
+    category: string;
+    event_date: string | null;
+    location: string | null;
 }
 
-export default function Welcome({ recentArticles }: Props) {
+interface Props {
+    recentArticles: Article[];
+    upcomingEvents: EventItem[];
+}
+
+export default function Welcome({ recentArticles, upcomingEvents }: Props) {
     return (
         <FrontLayout>
             <Head title="Beranda | Permata Indonesia" />
@@ -39,10 +50,10 @@ export default function Welcome({ recentArticles }: Props) {
         />
 
         {/* Dark overlay tipis */}
-        <div className="absolute inset-0 bg-black/35"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
 
         {/* Gradient untuk membantu keterbacaan teks */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1727]/85 via-[#0B1727]/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1727]/60 via-[#0B1727]/30 to-transparent"></div>
     </div>
 
     <div className="absolute inset-0 mx-auto flex max-w-7xl items-center px-4 sm:px-6 lg:px-8 mt-16">
@@ -122,92 +133,64 @@ export default function Welcome({ recentArticles }: Props) {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-3">
-                    {/* Card 1 */}
-                    <div className="group overflow-hidden rounded-xl bg-[#0B1727] text-white shadow-md transition-transform hover:-translate-y-1">
-                        <div className="relative h-48 w-full overflow-hidden bg-gray-800">
-                            <img
-                                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="Munas"
-                                className="h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-80"
-                            />
-                            <div className="absolute top-4 left-4 rounded bg-[#FACC15] px-2 py-1 text-xs font-bold text-[#0B1727]">
-                                MUNAS
-                            </div>
-                        </div>
-                        <div className="p-5">
-                            <h4 className="mb-4 text-lg font-bold">
-                                MUNAS <br /> PERMATA INDONESIA <br /> 2026
-                            </h4>
-                            <div className="space-y-2 text-sm text-gray-300">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="h-4 w-4 text-[#FACC15]" />
-                                    <span>Juni 2026</span>
+                    {upcomingEvents && upcomingEvents.length > 0 ? (
+                        upcomingEvents.map((event) => (
+                            <Link
+                                key={event.id}
+                                href={`/kegiatan/${event.slug}`}
+                                className="group cursor-pointer"
+                            >
+                                <div className="group overflow-hidden rounded-xl bg-[#0B1727] text-white shadow-md transition-transform hover:-translate-y-1">
+                                    <div className="relative h-48 w-full overflow-hidden bg-gray-800 shrink-0">
+                                        {event.cover_image ? (
+                                            <img
+                                                src={`/storage/${event.cover_image}`}
+                                                alt={event.title}
+                                                className="h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-80"
+                                            />
+                                        ) : (
+                                            <div className="h-full w-full bg-gray-700 opacity-60 flex items-center justify-center">
+                                                <Calendar className="h-12 w-12 text-gray-500 opacity-50" />
+                                            </div>
+                                        )}
+                                        <div className="absolute top-4 left-4 rounded bg-[#FACC15] px-2 py-1 text-xs font-bold text-[#0B1727]">
+                                            {event.category ? event.category.toUpperCase() : 'EVENT'}
+                                        </div>
+                                    </div>
+                                    <div className="p-5">
+                                        <h4 className="mb-4 text-lg font-bold line-clamp-3">
+                                            {event.title}
+                                        </h4>
+                                        <div className="space-y-2 text-sm text-gray-300">
+                                            {event.event_date && (
+                                                <div className="flex items-center gap-2">
+                                                    <Calendar className="h-4 w-4 text-[#FACC15] shrink-0" />
+                                                    <span>
+                                                        {new Date(event.event_date).toLocaleDateString('id-ID', {
+                                                            month: 'long',
+                                                            year: 'numeric'
+                                                        })}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {event.location && (
+                                                <div className="flex items-center gap-2">
+                                                    <MapPin className="h-4 w-4 text-[#FACC15] shrink-0" />
+                                                    <span className="line-clamp-1">{event.location}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4 text-[#FACC15]" />
-                                    <span>Makassar, Sulawesi Selatan</span>
-                                </div>
-                            </div>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="col-span-3 text-center py-12 bg-gray-50 rounded-xl border border-gray-100">
+                            <Calendar className="mx-auto h-12 w-12 text-gray-300 mb-3" />
+                            <h3 className="text-lg font-semibold text-gray-900 mb-1">Belum Ada Agenda</h3>
+                            <p className="text-gray-500">Belum ada agenda terdekat yang dijadwalkan.</p>
                         </div>
-                    </div>
-
-                    {/* Card 2 */}
-                    <div className="group overflow-hidden rounded-xl bg-[#0B1727] text-white shadow-md transition-transform hover:-translate-y-1">
-                        <div className="relative h-48 w-full overflow-hidden bg-gray-800">
-                            <img
-                                src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="TIMTI"
-                                className="h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-80"
-                            />
-                            <div className="absolute top-4 left-4 rounded bg-[#FACC15] px-2 py-1 text-xs font-bold text-[#0B1727]">
-                                TIMTI
-                            </div>
-                        </div>
-                        <div className="p-5">
-                            <h4 className="mb-4 text-lg font-bold">
-                                TIMTI <br /> 2026 <br /> &nbsp;
-                            </h4>
-                            <div className="space-y-2 text-sm text-gray-300">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="h-4 w-4 text-[#FACC15]" />
-                                    <span>September 2026</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4 text-[#FACC15]" />
-                                    <span>Jambi</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Card 3 */}
-                    <div className="group overflow-hidden rounded-xl bg-[#0B1727] text-white shadow-md transition-transform hover:-translate-y-1">
-                        <div className="relative h-48 w-full overflow-hidden bg-gray-800">
-                            <img
-                                src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="Seminar"
-                                className="h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-80"
-                            />
-                            <div className="absolute top-4 left-4 rounded bg-[#FACC15] px-2 py-1 text-xs font-bold text-[#0B1727]">
-                                SEMINAR
-                            </div>
-                        </div>
-                        <div className="p-5">
-                            <h4 className="mb-4 text-lg font-bold">
-                                SEMINAR <br /> NASIONAL <br /> &nbsp;
-                            </h4>
-                            <div className="space-y-2 text-sm text-gray-300">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="h-4 w-4 text-[#FACC15]" />
-                                    <span>Oktober 2026</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4 text-[#FACC15]" />
-                                    <span>Yogyakarta</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </section>
 

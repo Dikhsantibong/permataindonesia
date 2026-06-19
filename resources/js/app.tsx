@@ -19,6 +19,8 @@ createInertiaApp({
         switch (true) {
             case frontPages.includes(name):
                 return null;
+            case name === 'auth/login':
+                return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
