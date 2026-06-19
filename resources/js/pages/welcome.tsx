@@ -29,42 +29,56 @@ export default function Welcome({ recentArticles }: Props) {
             <Head title="Beranda | Permata Indonesia" />
             
             {/* Hero Section */}
-            <section className="relative h-[500px] w-full bg-gray-900 lg:h-[600px] mt-[-64px]">
-                {/* Placeholder for Hero Image */}
-                <div className="absolute inset-0 bg-[#0B1727]">
-                    <img
-                        src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                        alt="Miners"
-                        className="h-full w-full object-cover opacity-40 mix-blend-overlay"
-                    />
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0B1727] via-[#0B1727]/80 to-transparent"></div>
-                </div>
+           <section className="relative h-[500px] w-full lg:h-[600px] mt-[-64px]">
+    {/* Background Image */}
+    <div className="absolute inset-0">
+        <img
+            src="/hero/hero.png"
+            alt="Miners"
+            className="h-full w-full object-cover"
+        />
 
-                <div className="absolute inset-0 mx-auto flex max-w-7xl items-center px-4 sm:px-6 lg:px-8 mt-16">
-                    <div className="max-w-2xl text-white">
-                        <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                            PERMATA <br />
-                            <span className="text-[#FACC15]">INDONESIA</span>
-                        </h2>
-                        <p className="mt-4 max-w-lg text-lg font-medium text-gray-200 sm:text-xl">
-                            Wadah Kolaborasi Mahasiswa Pertambangan Indonesia
-                        </p>
-                        <p className="mt-4 max-w-lg text-sm text-gray-300">
-                            Bersatu, berkolaborasi, dan berkontribusi untuk kemajuan pertambangan Indonesia yang berkelanjutan.
-                        </p>
-                        <div className="mt-8 flex flex-wrap gap-4">
-                            <Link href="/tentang-kami" className="rounded bg-[#FACC15] px-6 py-3 text-sm font-bold text-[#0B1727] transition-colors hover:bg-yellow-500">
-                                TENTANG KAMI
-                            </Link>
-                            <Link href="/kegiatan" className="rounded border-2 border-white bg-transparent px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-[#0B1727]">
-                                KEGIATAN NASIONAL →
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        {/* Dark overlay tipis */}
+        <div className="absolute inset-0 bg-black/35"></div>
 
+        {/* Gradient untuk membantu keterbacaan teks */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1727]/85 via-[#0B1727]/50 to-transparent"></div>
+    </div>
+
+    <div className="absolute inset-0 mx-auto flex max-w-7xl items-center px-4 sm:px-6 lg:px-8 mt-16">
+        <div className="max-w-2xl text-white">
+            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                PERMATA <br />
+                <span className="text-[#FACC15]">INDONESIA</span>
+            </h2>
+
+            <p className="mt-4 max-w-lg text-lg font-medium text-gray-200 sm:text-xl">
+                Wadah Kolaborasi Mahasiswa Pertambangan Indonesia
+            </p>
+
+            <p className="mt-4 max-w-lg text-sm text-gray-300">
+                Bersatu, berkolaborasi, dan berkontribusi untuk kemajuan
+                pertambangan Indonesia yang berkelanjutan.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                    href="/tentang-kami"
+                    className="rounded bg-[#FACC15] px-6 py-3 text-sm font-bold text-[#0B1727] hover:bg-yellow-500"
+                >
+                    TENTANG KAMI
+                </Link>
+
+                <Link
+                    href="/kegiatan"
+                    className="rounded border-2 border-white px-6 py-3 text-sm font-bold text-white hover:bg-white hover:text-[#0B1727]"
+                >
+                    KEGIATAN NASIONAL →
+                </Link>
+            </div>
+        </div>
+    </div>
+</section>
             {/* Stats Strip */}
             <section className="relative z-10 mx-auto -mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="rounded-xl bg-[#0B1727] p-6 text-white shadow-xl lg:p-8">

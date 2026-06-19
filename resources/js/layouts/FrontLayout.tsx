@@ -46,16 +46,13 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
             <nav className="fixed top-0 z-50 w-full bg-[#0B1727] text-white shadow-md">
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
                     <Link href="/" className="flex items-center gap-3">
-                        {/* Logo Placeholder */}
-                        <div className="flex h-10 w-10 items-center justify-center rounded bg-[#FACC15] font-bold text-[#0B1727]">
-                            PI
-                        </div>
+                        <img src="/logo/permata.png" alt="Permata Indonesia" className="h-10 w-10 object-contain" />
                         <div>
                             <h1 className="text-lg font-bold leading-tight tracking-wider">
-                                PERMATA
+                                PERMATA INDONESIA
                             </h1>
                             <p className="text-[10px] leading-none text-gray-300">
-                                INDONESIA
+                                Perhimpunan Mahasiswa Pertambangan Indonesia
                             </p>
                         </div>
                     </Link>
@@ -197,15 +194,13 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
                         {/* About Section */}
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded bg-[#FACC15] font-bold text-[#0B1727]">
-                                    PI
-                                </div>
+                                <img src="/logo/permata.png" alt="Permata Indonesia" className="h-10 w-10 object-contain" />
                                 <div>
                                     <h3 className="text-lg font-bold leading-tight tracking-wider">
-                                        PERMATA
+                                        PERMATA INDONESIA
                                     </h3>
                                     <p className="text-[10px] leading-none text-gray-300">
-                                        INDONESIA
+                                        Perhimpunan Mahasiswa Pertambangan Indonesia
                                     </p>
                                 </div>
                             </div>
@@ -216,7 +211,7 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
                                 <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
                                     <Facebook className="h-5 w-5" />
                                 </a>
-                                <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
+                                <a href="https://instagram.com/permataindonesiaofficial" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#FACC15] transition-colors">
                                     <Instagram className="h-5 w-5" />
                                 </a>
                                 <a href="#" className="text-gray-400 hover:text-[#FACC15] transition-colors">
@@ -292,15 +287,18 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
                                     <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-[#FACC15]" />
                                     <span>Indonesia</span>
                                 </li>
-                                <li className="flex items-center gap-3">
-                                    <Mail className="h-5 w-5 flex-shrink-0 text-[#FACC15]" />
-                                    <a href="mailto:info@permata-indonesia.org" className="hover:text-white transition-colors">
-                                        info@permata-indonesia.org
+                                <li className="flex items-start gap-3">
+                                    <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 text-[#FACC15]" />
+                                    <a href="mailto:permataindonesia030992@gmail.com" className="hover:text-white transition-colors">
+                                        permataindonesia030992@gmail.com
                                     </a>
                                 </li>
-                                <li className="flex items-center gap-3">
-                                    <Phone className="h-5 w-5 flex-shrink-0 text-[#FACC15]" />
-                                    <span>+62 XXX XXX XXXX</span>
+                                <li className="flex items-start gap-3">
+                                    <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-[#FACC15]" />
+                                    <div className="flex flex-col gap-1">
+                                        <span>085204665-0376 (Sekretaris Jenderal)</span>
+                                        <span>0822-9360-9354 (Sekretaris Eksekutif)</span>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

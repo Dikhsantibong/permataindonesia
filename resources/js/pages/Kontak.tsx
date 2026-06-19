@@ -30,15 +30,16 @@ export default function Kontak() {
                                 <div className="mt-1"><Mail className="text-[#FACC15] w-6 h-6" /></div>
                                 <div>
                                     <h3 className="font-semibold text-gray-900">Email</h3>
-                                    <p className="text-sm text-gray-600 mt-1">sekretariat@permata-indonesia.org</p>
+                                    <p className="text-sm text-gray-600 mt-1">permataindonesia030992@gmail.com</p>
                                 </div>
                             </div>
                             
                             <div className="flex gap-4">
                                 <div className="mt-1"><Phone className="text-[#FACC15] w-6 h-6" /></div>
                                 <div>
-                                    <h3 className="font-semibold text-gray-900">Telepon / WhatsApp</h3>
-                                    <p className="text-sm text-gray-600 mt-1">+62 812-3456-7890</p>
+                                    <h3 className="font-semibold text-gray-900">Contact Person</h3>
+                                    <p className="text-sm text-gray-600 mt-1">085204665-0376 (Sekretaris Jenderal)</p>
+                                    <p className="text-sm text-gray-600 mt-1">0822-9360-9354 (Sekretaris Eksekutif)</p>
                                 </div>
                             </div>
 
@@ -53,9 +54,9 @@ export default function Kontak() {
 
                         <h2 className="text-xl font-bold text-[#0B1727] mb-4 mt-12">Media Sosial</h2>
                         <div className="grid grid-cols-2 gap-4">
-                            <a href="#" className="flex items-center gap-2 text-gray-600 hover:text-[#0B1727]">
+                            <a href="https://instagram.com/permataindonesiaofficial" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-gray-600 hover:text-[#0B1727]">
                                 <Instagram className="w-5 h-5 text-pink-600" />
-                                <span className="text-sm font-medium">@permata.indonesia</span>
+                                <span className="text-sm font-medium">@permataindonesiaofficial</span>
                             </a>
                             <a href="#" className="flex items-center gap-2 text-gray-600 hover:text-[#0B1727]">
                                 <Youtube className="w-5 h-5 text-red-600" />
