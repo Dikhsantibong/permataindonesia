@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, ImageIcon, LayoutGrid, Newspaper, Calendar } from 'lucide-react';
+import { BookOpen, FolderGit2, ImageIcon, LayoutGrid, Newspaper, Calendar, FileText } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -36,6 +36,11 @@ const mainNavItems: NavItem[] = [
         title: 'Kegiatan',
         href: '/admin/events',
         icon: Calendar,
+    },
+    {
+        title: 'Dokumen',
+        href: '/admin/documents',
+        icon: FileText,
     },
 ];
 

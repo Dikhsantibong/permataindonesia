@@ -96,7 +96,7 @@ export default function Welcome({ recentArticles, upcomingEvents }: Props) {
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:divide-x md:divide-gray-700">
                         <div className="flex flex-col items-center justify-center text-center">
                             <School className="mb-2 h-8 w-8 text-[#FACC15]" />
-                            <span className="text-2xl font-bold">100+</span>
+                            <span className="text-2xl font-bold">52</span>
                             <span className="text-xs text-gray-400">Kampus Anggota</span>
                         </div>
                         <div className="flex flex-col items-center justify-center text-center">

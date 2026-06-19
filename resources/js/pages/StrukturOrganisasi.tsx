@@ -20,7 +20,18 @@ export default function StrukturOrganisasi() {
     return (
         <FrontLayout>
             <Head title="Struktur Organisasi | Permata Indonesia" />
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 overflow-x-auto">
+            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 overflow-x-auto relative">
+                {/* Background Image */}
+                <div className="absolute inset-0 -z-10">
+                    <img
+                        src="/bg-anggota.png"
+                        alt="Background"
+                        className="w-full h-full object-cover"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-white/50 dark:bg-gray-900/90"></div>
+                </div>
+
                 <div className="min-w-[1000px] flex flex-col items-center pb-20">
                     <h1 className="text-2xl font-bold text-primary mb-8 text-center uppercase tracking-wider">
                         Struktur Organisasi
@@ -34,23 +45,23 @@ export default function StrukturOrganisasi() {
                         </div>
 
                         {/* Main Vertical Line Top */}
-                        <div className="w-[3px] h-12 bg-foreground/30"></div>
+                        <div className="w-[3px] h-12 bg-gray-400 dark:bg-gray-500"></div>
 
                         {/* Level 2: Sekum & Bendum */}
                         <div className="relative w-full max-w-4xl flex justify-center">
                             {/* Horizontal Line */}
-                            <div className="absolute top-0 left-1/4 right-1/4 h-[3px] bg-foreground/30"></div>
+                            <div className="absolute top-0 left-1/4 right-1/4 h-[3px] bg-gray-400 dark:bg-gray-500"></div>
                             {/* Center Vertical Line passing through */}
-                            <div className="absolute top-0 bottom-0 left-1/2 w-[3px] -ml-[1.5px] bg-foreground/30"></div>
+                            <div className="absolute top-0 bottom-0 left-1/2 w-[3px] -ml-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                             
                             {/* Left Side: Sekretaris Eksekutif */}
                             <div className="w-1/2 flex flex-col items-center relative">
-                                <div className="absolute top-0 left-1/2 w-[3px] h-6 -ml-[1.5px] bg-foreground/30"></div>
+                                <div className="absolute top-0 left-1/2 w-[3px] h-6 -ml-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="mt-6 flex flex-col items-center gap-4 relative">
                                     <div className="bg-primary text-primary-foreground border-2 border-primary/20 rounded-lg px-4 py-3 font-bold text-center w-56 shadow-sm text-xs uppercase z-10 relative">
                                         Sekretaris Eksekutif 1
                                         {/* Connector to SE 2 */}
-                                        <div className="absolute top-full left-1/2 w-[3px] h-4 -ml-[1.5px] bg-foreground/30"></div>
+                                        <div className="absolute top-full left-1/2 w-[3px] h-4 -ml-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                     </div>
                                     <div className="bg-primary text-primary-foreground border-2 border-primary/20 rounded-lg px-4 py-3 font-bold text-center w-56 shadow-sm text-xs uppercase z-10">
                                         Sekretaris Eksekutif 2
@@ -60,12 +71,12 @@ export default function StrukturOrganisasi() {
 
                             {/* Right Side: Bendahara */}
                             <div className="w-1/2 flex flex-col items-center relative">
-                                <div className="absolute top-0 left-1/2 w-[3px] h-6 -ml-[1.5px] bg-foreground/30"></div>
+                                <div className="absolute top-0 left-1/2 w-[3px] h-6 -ml-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="mt-6 flex flex-col items-center gap-4 relative">
                                     <div className="bg-primary text-primary-foreground border-2 border-primary/20 rounded-lg px-4 py-3 font-bold text-center w-56 shadow-sm text-xs uppercase z-10 relative">
                                         Bendahara 1
                                         {/* Connector to Ben 2 */}
-                                        <div className="absolute top-full left-1/2 w-[3px] h-4 -ml-[1.5px] bg-foreground/30"></div>
+                                        <div className="absolute top-full left-1/2 w-[3px] h-4 -ml-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                     </div>
                                     <div className="bg-primary text-primary-foreground border-2 border-primary/20 rounded-lg px-4 py-3 font-bold text-center w-56 shadow-sm text-xs uppercase z-10">
                                         Bendahara 2
@@ -75,41 +86,41 @@ export default function StrukturOrganisasi() {
                         </div>
 
                         {/* Main vertical line segment continuing down */}
-                        <div className="w-[3px] h-12 bg-foreground/30 relative z-0"></div>
+                        <div className="w-[3px] h-12 bg-gray-400 dark:bg-gray-500 relative z-0"></div>
 
                         {/* Level 3: Departments */}
                         <div className="relative w-full flex justify-between px-4">
                             {/* Horizontal Line connecting Departments */}
                             {/* It starts from the middle of the first department to the middle of the last department */}
-                            <div className="absolute top-0 left-[12.5%] right-[12.5%] h-[3px] bg-foreground/30 z-0"></div>
+                            <div className="absolute top-0 left-[12.5%] right-[12.5%] h-[3px] bg-gray-400 dark:bg-gray-500 z-0"></div>
                             {/* Center vertical line continuing down past departments to wilayah */}
-                            <div className="absolute top-0 bottom-[-48px] left-1/2 w-[3px] -ml-[1.5px] bg-foreground/30 z-0"></div>
+                            <div className="absolute top-0 bottom-[-48px] left-1/2 w-[3px] -ml-[1.5px] bg-gray-400 dark:bg-gray-500 z-0"></div>
 
                             {/* Departemen 1: Hubungan Masyarakat */}
                             <div className="w-1/4 flex flex-col items-center relative z-10">
-                                <div className="w-[3px] h-6 bg-foreground/30"></div>
+                                <div className="w-[3px] h-6 bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="bg-secondary text-secondary-foreground border-2 border-secondary/50 rounded-lg px-2 py-3 font-bold text-center w-[90%] shadow-sm text-[11px] leading-tight uppercase flex items-center justify-center min-h-[60px]">
                                     Departemen Hubungan Masyarakat
                                 </div>
                                 {/* Divisi list */}
                                 <div className="relative mt-4 self-start ml-6">
                                     {/* Vertical line connecting divisions */}
-                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-foreground/30"></div>
+                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-gray-400 dark:bg-gray-500"></div>
                                     <div className="flex flex-col gap-3 pl-4">
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Internal
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Eksternal
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Media dan Informasi
                                             </div>
@@ -120,34 +131,34 @@ export default function StrukturOrganisasi() {
 
                             {/* Departemen 2: Penelitian dan Pengembangan */}
                             <div className="w-1/4 flex flex-col items-center relative z-10">
-                                <div className="w-[3px] h-6 bg-foreground/30"></div>
+                                <div className="w-[3px] h-6 bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="bg-secondary text-secondary-foreground border-2 border-secondary/50 rounded-lg px-2 py-3 font-bold text-center w-[90%] shadow-sm text-[11px] leading-tight uppercase flex items-center justify-center min-h-[60px]">
                                     Departemen Penelitian dan Pengembangan
                                 </div>
                                 {/* Divisi list */}
                                 <div className="relative mt-4 self-start ml-6">
-                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-foreground/30"></div>
+                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-gray-400 dark:bg-gray-500"></div>
                                     <div className="flex flex-col gap-3 pl-4">
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Kajian
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Pelatihan dan Pengembangan
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[9px] shadow-sm uppercase leading-tight">
                                                 Divisi Temu Ilmiah Mahasiswa Tambang Indonesia
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Advokasi
                                             </div>
@@ -158,22 +169,22 @@ export default function StrukturOrganisasi() {
 
                             {/* Departemen 3: Sosial dan Lingkungan */}
                             <div className="w-1/4 flex flex-col items-center relative z-10">
-                                <div className="w-[3px] h-6 bg-foreground/30"></div>
+                                <div className="w-[3px] h-6 bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="bg-secondary text-secondary-foreground border-2 border-secondary/50 rounded-lg px-2 py-3 font-bold text-center w-[90%] shadow-sm text-[11px] leading-tight uppercase flex items-center justify-center min-h-[60px]">
                                     Departemen Sosial dan Lingkungan
                                 </div>
                                 {/* Divisi list */}
                                 <div className="relative mt-4 self-start ml-6">
-                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-foreground/30"></div>
+                                    <div className="absolute top-[-16px] bottom-6 left-0 w-[3px] bg-gray-400 dark:bg-gray-500"></div>
                                     <div className="flex flex-col gap-3 pl-4">
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Sosial
                                             </div>
                                         </div>
                                         <div className="relative">
-                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-foreground/30"></div>
+                                            <div className="absolute top-1/2 -left-4 w-4 h-[3px] -mt-[1.5px] bg-gray-400 dark:bg-gray-500"></div>
                                             <div className="bg-accent text-accent-foreground border-2 border-border rounded-lg px-2 py-2 font-bold text-center w-40 text-[10px] shadow-sm uppercase">
                                                 Divisi Lingkungan
                                             </div>
@@ -184,7 +195,7 @@ export default function StrukturOrganisasi() {
 
                             {/* Departemen 4: Kewirausahaan */}
                             <div className="w-1/4 flex flex-col items-center relative z-10">
-                                <div className="w-[3px] h-6 bg-foreground/30"></div>
+                                <div className="w-[3px] h-6 bg-gray-400 dark:bg-gray-500"></div>
                                 <div className="bg-secondary text-secondary-foreground border-2 border-secondary/50 rounded-lg px-2 py-3 font-bold text-center w-[90%] shadow-sm text-[11px] leading-tight uppercase flex items-center justify-center min-h-[60px]">
                                     Departemen Kewirausahaan
                                 </div>
@@ -197,12 +208,12 @@ export default function StrukturOrganisasi() {
                         {/* Level 4: Wilayah */}
                         <div className="relative w-full max-w-5xl flex justify-between mt-0 z-10 items-start pb-8">
                             {/* Horizontal Line connecting Wilayah */}
-                            <div className="absolute top-0 left-[10%] right-[10%] h-[3px] bg-foreground/30"></div>
+                            <div className="absolute top-0 left-[10%] right-[10%] h-[3px] bg-gray-400 dark:bg-gray-500"></div>
                             
                             {/* Wilayah 1-5 */}
                             {[1, 2, 3, 4, 5].map((wilayahId) => (
                                 <div key={wilayahId} className="flex flex-col items-center w-[19%] relative">
-                                    <div className="w-[3px] h-6 bg-foreground/30"></div>
+                                    <div className="w-[3px] h-6 bg-gray-400 dark:bg-gray-500"></div>
                                     <button 
                                         onClick={() => toggleWilayah(wilayahId)}
                                         className={`border-2 rounded-lg px-2 py-3 font-bold text-center w-full shadow-sm text-[11px] uppercase z-10 transition-all duration-200 cursor-pointer ${
@@ -223,7 +234,7 @@ export default function StrukturOrganisasi() {
                                             activeWilayah === wilayahId ? 'max-h-[800px] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
                                         }`}
                                     >
-                                        <div className="w-[3px] h-4 bg-foreground/30"></div>
+                                        <div className="w-[3px] h-4 bg-gray-400 dark:bg-gray-500"></div>
                                         <div className="bg-card text-card-foreground border-2 border-border/50 rounded-lg p-3 w-full shadow-sm text-[9px] font-semibold text-center flex flex-col gap-2 leading-tight">
                                             {wilayahData[wilayahId as keyof typeof wilayahData].map((himpunan, index) => (
                                                 <span key={index} className="pb-1.5 border-b border-border/30 last:border-0 last:pb-0">

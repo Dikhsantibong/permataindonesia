@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Document;
 use App\Models\GalleryItem;
 use App\Models\Event;
 use Inertia\Inertia;
@@ -106,6 +107,42 @@ class PublicController extends Controller
 
         return Inertia::render('EventDetail', [
             'event' => $event,
+        ]);
+    }
+
+    public function documents(): Response
+    {
+        $documents = Document::published()
+            ->category('organisasi_hukum')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Dokumen', [
+            'documents' => $documents,
+        ]);
+    }
+
+    public function journals(): Response
+    {
+        $documents = Document::published()
+            ->category('jurnal_karya_ilmiah')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Jurnal', [
+            'documents' => $documents,
+        ]);
+    }
+
+    public function library(): Response
+    {
+        $documents = Document::published()
+            ->category('perpustakaan_digital')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Perpustakaan', [
+            'documents' => $documents,
         ]);
     }
 }

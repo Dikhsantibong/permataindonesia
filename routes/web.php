@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PublicController;
@@ -15,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('admin/articles', ArticleController::class);
     Route::resource('admin/gallery', GalleryController::class);
     Route::resource('admin/events', EventController::class)->names('admin.events');
+    Route::resource('admin/documents', DocumentController::class);
 });
 
 Route::inertia('/tentang-kami', 'TentangKami')->name('tentang-kami');
@@ -27,9 +29,10 @@ Route::get('/seminar-pelatihan', [PublicController::class, 'seminarPelatihan'])-
 Route::get('/media', [PublicController::class, 'media'])->name('media');
 Route::get('/media/{slug}', [PublicController::class, 'articleShow'])->name('article.show');
 Route::get('/galeri', [PublicController::class, 'galeri'])->name('galeri');
-Route::inertia('/dokumen', 'Dokumen')->name('dokumen');
-Route::inertia('/jurnal', 'Jurnal')->name('jurnal');
-Route::inertia('/perpustakaan', 'Perpustakaan')->name('perpustakaan');
+Route::get('/dokumen', [PublicController::class, 'documents'])->name('dokumen');
+Route::get('/jurnal', [PublicController::class, 'journals'])->name('jurnal');
+Route::get('/perpustakaan', [PublicController::class, 'library'])->name('perpustakaan');
+Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
 Route::inertia('/kontak', 'Kontak')->name('kontak');
 
 require __DIR__.'/settings.php';
