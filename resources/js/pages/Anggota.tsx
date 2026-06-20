@@ -1,6 +1,6 @@
 import FrontLayout from '@/layouts/FrontLayout';
 import { Head } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -15,72 +15,73 @@ L.Icon.Default.mergeOptions({
 
 interface Himpunan {
     name: string;
+    univ: string;
     lat: number;
     lng: number;
 }
 
 const wilayahData: Record<number, Himpunan[]> = {
     1: [
-        { name: "PERMATA FT UNSRI", lat: -3.2185, lng: 104.6521 },
-        { name: "HIMATA ISTP", lat: 3.5952, lng: 98.6722 },
-        { name: "HMTP FT UNP", lat: -0.9009, lng: 100.3486 },
-        { name: "HIMATA UBB", lat: -1.8624, lng: 106.1082 },
-        { name: "HIMATA STTIND", lat: -0.9100, lng: 100.3500 },
-        { name: "HMTT UMB", lat: -3.8000, lng: 102.2600 },
-        { name: "HMTP USK", lat: 5.5700, lng: 95.3600 },
-        { name: "HMTP UNJA", lat: -1.6100, lng: 103.5800 },
-        { name: "HMTA ITERA", lat: -5.3600, lng: 105.3100 },
-        { name: "HMPS MATARATU PAP", lat: -4.0000, lng: 104.0000 }
+        { name: "PERMATA FT UNSRI", univ: "Universitas Sriwijaya", lat: -3.2185, lng: 104.6521 },
+        { name: "HIMATA ISTP", univ: "Institut Sains dan Teknologi Td. Pardede", lat: 3.5952, lng: 98.6722 },
+        { name: "HMTP FT UNP", univ: "Universitas Negeri Padang", lat: -0.9009, lng: 100.3486 },
+        { name: "HIMATA UBB", univ: "Universitas Bangka Belitung", lat: -1.8624, lng: 106.1082 },
+        { name: "HIMATA STTIND", univ: "Sekolah Tinggi Teknologi Industri Padang", lat: -0.9100, lng: 100.3500 },
+        { name: "HMTT UMB", univ: "Universitas Muhammadiyah Bengkulu", lat: -3.8000, lng: 102.2600 },
+        { name: "HMTP USK", univ: "Universitas Syiah Kuala", lat: 5.5700, lng: 95.3600 },
+        { name: "HMTP UNJA", univ: "Universitas Jambi", lat: -1.6100, lng: 103.5800 },
+        { name: "HMTA ITERA", univ: "Institut Teknologi Sumatera", lat: -5.3600, lng: 105.3100 },
+        { name: "HMPS MATARATU PAP", univ: "Universitas Papua (Dummy)", lat: -4.0000, lng: 104.0000 }
     ],
     2: [
-        { name: "HMT-ITB", lat: -6.8915, lng: 107.6107 },
-        { name: "HMTP UNISBA", lat: -6.9048, lng: 107.6083 },
-        { name: "HMTA UPN", lat: -7.7656, lng: 110.4079 },
-        { name: "HMTT USAKTI", lat: -6.1674, lng: 106.7905 },
-        { name: "HMTPM AGP (D3)", lat: -6.9200, lng: 107.6000 },
-        { name: "HIMATETA ITATS", lat: -7.2885, lng: 112.7842 },
-        { name: "HMTA ITNY", lat: -7.7800, lng: 110.4100 },
-        { name: "HMTP UNDANA", lat: -10.1500, lng: 123.6300 },
-        { name: "HIMETA ITSB", lat: -6.3500, lng: 107.1500 },
-        { name: "HITAM UIN", lat: -6.3000, lng: 106.7500 },
-        { name: "HMTP ITY", lat: -7.8000, lng: 110.4000 },
-        { name: "HMT-UMTAS", lat: -7.3300, lng: 108.2000 },
-        { name: "HMTA UMMAT", lat: -8.5800, lng: 116.1000 },
-        { name: "HMT UMMAT (D3)", lat: -8.5850, lng: 116.1050 },
-        { name: "HMT UNDOVA", lat: -8.5000, lng: 116.5000 },
-        { name: "HMTP PEP (D3)", lat: -6.9000, lng: 107.6500 },
-        { name: "HIMATA UNEJ", lat: -8.1600, lng: 113.7200 },
-        { name: "HMTT STTMI (D3)", lat: -6.9500, lng: 107.6000 },
-        { name: "PERMATA UTS", lat: -8.4900, lng: 117.4100 }
+        { name: "HMT-ITB", univ: "Institut Teknologi Bandung", lat: -6.8915, lng: 107.6107 },
+        { name: "HMTP UNISBA", univ: "Universitas Islam Bandung", lat: -6.9048, lng: 107.6083 },
+        { name: "HMTA UPN", univ: "UPN Veteran Yogyakarta", lat: -7.7656, lng: 110.4079 },
+        { name: "HMTT USAKTI", univ: "Universitas Trisakti", lat: -6.1674, lng: 106.7905 },
+        { name: "HMTPM AGP (D3)", univ: "Akademi Geologi dan Pertambangan", lat: -6.9200, lng: 107.6000 },
+        { name: "HIMATETA ITATS", univ: "Institut Teknologi Adhi Tama Surabaya", lat: -7.2885, lng: 112.7842 },
+        { name: "HMTA ITNY", univ: "Institut Teknologi Nasional Yogyakarta", lat: -7.7800, lng: 110.4100 },
+        { name: "HMTP UNDANA", univ: "Universitas Nusa Cendana", lat: -10.1500, lng: 123.6300 },
+        { name: "HIMETA ITSB", univ: "Institut Teknologi Sains Bandung", lat: -6.3500, lng: 107.1500 },
+        { name: "HITAM UIN", univ: "UIN Syarif Hidayatullah", lat: -6.3000, lng: 106.7500 },
+        { name: "HMTP ITY", univ: "Institut Teknologi Yogyakarta", lat: -7.8000, lng: 110.4000 },
+        { name: "HMT-UMTAS", univ: "Universitas Muhammadiyah Tasikmalaya", lat: -7.3300, lng: 108.2000 },
+        { name: "HMTA UMMAT", univ: "Universitas Muhammadiyah Mataram", lat: -8.5800, lng: 116.1000 },
+        { name: "HMT UMMAT (D3)", univ: "Universitas Muhammadiyah Mataram (D3)", lat: -8.5850, lng: 116.1050 },
+        { name: "HMT UNDOVA", univ: "Universitas Cordova", lat: -8.5000, lng: 116.5000 },
+        { name: "HMTP PEP (D3)", univ: "Politeknik Energi dan Pertambangan", lat: -6.9000, lng: 107.6500 },
+        { name: "HIMATA UNEJ", univ: "Universitas Jember", lat: -8.1600, lng: 113.7200 },
+        { name: "HMTT STTMI (D3)", univ: "Sekolah Tinggi Teknologi Mineral Indonesia", lat: -6.9500, lng: 107.6000 },
+        { name: "PERMATA UTS", univ: "Universitas Teknologi Sumbawa", lat: -8.4900, lng: 117.4100 }
     ],
     3: [
-        { name: "HMTP UNMUL", lat: -0.4700, lng: 117.1500 },
-        { name: "HMTP UNIKARTA", lat: -0.4200, lng: 116.9800 },
-        { name: "HIMASAPTA ULM", lat: -3.2900, lng: 114.5800 },
-        { name: "HMTP UPR", lat: -2.2100, lng: 113.9000 },
-        { name: "INTAN POLIBAN", lat: -3.2950, lng: 114.5850 },
-        { name: "HIMATA FT UNTAN", lat: -0.0500, lng: 109.3400 },
-        { name: "HMJTSP POLITAP", lat: -1.8200, lng: 109.9700 },
-        { name: "HMTP POLISAFARIS", lat: -0.5000, lng: 117.1000 }
+        { name: "HMTP UNMUL", univ: "Universitas Mulawarman", lat: -0.4700, lng: 117.1500 },
+        { name: "HMTP UNIKARTA", univ: "Universitas Kutai Kartanegara", lat: -0.4200, lng: 116.9800 },
+        { name: "HIMASAPTA ULM", univ: "Universitas Lambung Mangkurat", lat: -3.2900, lng: 114.5800 },
+        { name: "HMTP UPR", univ: "Universitas Palangka Raya", lat: -2.2100, lng: 113.9000 },
+        { name: "INTAN POLIBAN", univ: "Politeknik Negeri Banjarmasin", lat: -3.2950, lng: 114.5850 },
+        { name: "HIMATA FT UNTAN", univ: "Universitas Tanjungpura", lat: -0.0500, lng: 109.3400 },
+        { name: "HMJTSP POLITAP", univ: "Politeknik Negeri Ketapang", lat: -1.8200, lng: 109.9700 },
+        { name: "HMTP POLISAFARIS", univ: "Politeknik Samarinda", lat: -0.5000, lng: 117.1000 }
     ],
     4: [
-        { name: "HMTP UPRI Makassar", lat: -5.1300, lng: 119.4100 },
-        { name: "HMTP UMI", lat: -5.1350, lng: 119.4500 },
-        { name: "HMTP USN Kolaka", lat: -4.0500, lng: 121.6000 },
-        { name: "PERMATA FT-UH", lat: -5.1320, lng: 119.4800 },
-        { name: "HMTP UHO", lat: -4.0100, lng: 122.5200 },
-        { name: "HMTP UNIDAYAN", lat: -5.4600, lng: 122.6000 },
-        { name: "HMTP UM Kendari", lat: -3.9800, lng: 122.5100 },
-        { name: "HMTP UNIBOS", lat: -5.1380, lng: 119.4400 },
-        { name: "PERMATA UST", lat: -5.1400, lng: 119.4300 }
+        { name: "HMTP UPRI Makassar", univ: "Universitas Pejuang Republik Indonesia", lat: -5.1300, lng: 119.4100 },
+        { name: "HMTP UMI", univ: "Universitas Muslim Indonesia", lat: -5.1350, lng: 119.4500 },
+        { name: "HMTP USN Kolaka", univ: "Universitas Sembilanbelas November Kolaka", lat: -4.0500, lng: 121.6000 },
+        { name: "PERMATA FT-UH", univ: "Universitas Hasanuddin", lat: -5.1320, lng: 119.4800 },
+        { name: "HMTP UHO", univ: "Universitas Halu Oleo", lat: -4.0100, lng: 122.5200 },
+        { name: "HMTP UNIDAYAN", univ: "Universitas Dayanu Ikhsanuddin", lat: -5.4600, lng: 122.6000 },
+        { name: "HMTP UM Kendari", univ: "Universitas Muhammadiyah Kendari", lat: -3.9800, lng: 122.5100 },
+        { name: "HMTP UNIBOS", univ: "Universitas Bosowa", lat: -5.1380, lng: 119.4400 },
+        { name: "PERMATA UST", univ: "Universitas Sains dan Teknologi Jayapura", lat: -5.1400, lng: 119.4300 }
     ],
     5: [
-        { name: "HMTP USTJ", lat: -2.5700, lng: 140.6400 },
-        { name: "HMTP UNCEN", lat: -2.5800, lng: 140.6500 },
-        { name: "HMTP UMMU", lat: -0.8000, lng: 127.3800 },
-        { name: "HMTP UNIPA", lat: -0.8600, lng: 134.0600 },
-        { name: "HMTP UNKHAIR", lat: -0.8100, lng: 127.3700 },
-        { name: "HMTP PAT", lat: -2.5500, lng: 140.6300 }
+        { name: "HMTP USTJ", univ: "Universitas Sains dan Teknologi Jayapura", lat: -2.5700, lng: 140.6400 },
+        { name: "HMTP UNCEN", univ: "Universitas Cenderawasih", lat: -2.5800, lng: 140.6500 },
+        { name: "HMTP UMMU", univ: "Universitas Muhammadiyah Maluku Utara", lat: -0.8000, lng: 127.3800 },
+        { name: "HMTP UNIPA", univ: "Universitas Papua", lat: -0.8600, lng: 134.0600 },
+        { name: "HMTP UNKHAIR", univ: "Universitas Khairun", lat: -0.8100, lng: 127.3700 },
+        { name: "HMTP PAT", univ: "Politeknik Amamapare Timika", lat: -2.5500, lng: 140.6300 }
     ]
 };
 
@@ -111,6 +112,26 @@ function MapUpdater({ activeWilayah }: { activeWilayah: number }) {
 
 export default function Anggota() {
     const [activeWilayah, setActiveWilayah] = useState<number>(4);
+    const [activePopupIndex, setActivePopupIndex] = useState<number>(0);
+    const markerRefs = useRef<Record<number, L.Marker | null>>({});
+
+    useEffect(() => {
+        setActivePopupIndex(0);
+        const timer = setInterval(() => {
+            setActivePopupIndex((prev) => {
+                const total = wilayahData[activeWilayah].length;
+                return (prev + 1) % total;
+            });
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [activeWilayah]);
+
+    useEffect(() => {
+        const marker = markerRefs.current[activePopupIndex];
+        if (marker) {
+            marker.openPopup();
+        }
+    }, [activePopupIndex, activeWilayah]);
 
     // Create a custom icon generator
     const createCustomIcon = (himpunan: string, wilayahId: number) => {
@@ -165,6 +186,12 @@ export default function Anggota() {
                                             key={i} 
                                             position={[himpunan.lat, himpunan.lng]}
                                             icon={createCustomIcon(himpunan.name, activeWilayah)}
+                                            ref={(ref) => {
+                                                markerRefs.current[i] = ref;
+                                            }}
+                                            eventHandlers={{
+                                                click: () => setActivePopupIndex(i)
+                                            }}
                                         >
                                             <Popup className="custom-popup">
                                                 <div className="text-center p-2">
@@ -180,7 +207,8 @@ export default function Anggota() {
                                                         className="h-16 w-16 mx-auto mb-3 object-contain" 
                                                     />
                                                     <h3 className="font-bold text-[#0B1727] text-sm leading-tight">{himpunan.name}</h3>
-                                                    <p className="text-xs text-gray-500 mt-1">Anggota Wilayah {romanNumerals[activeWilayah - 1]}</p>
+                                                    <p className="text-xs text-gray-600 mt-1">{himpunan.univ}</p>
+                                                    <p className="text-[10px] text-gray-400 mt-1">Wilayah {romanNumerals[activeWilayah - 1]}</p>
                                                 </div>
                                             </Popup>
                                         </Marker>
@@ -210,7 +238,10 @@ export default function Anggota() {
                                                     className="w-full h-full object-contain" 
                                                 />
                                             </div>
-                                            <span className="group-hover:text-[#0B1727]">{himpunan.name}</span>
+                                            <div className="flex flex-col">
+                                                <span className="group-hover:text-[#0B1727] leading-tight">{himpunan.name}</span>
+                                                <span className="text-[11px] text-gray-500">{himpunan.univ}</span>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>
