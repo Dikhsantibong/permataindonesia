@@ -1,6 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { Plus, Pencil, Trash2, Download, Search, FileText } from 'lucide-react';
 import { useState } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface Document {
     id: number;
@@ -97,16 +98,20 @@ export default function DocumentsIndex({ documents }: Props) {
                 {/* Filters */}
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-2">
-                        <select
+                        <Select
                             value={categoryFilter}
-                            onChange={(e) => setCategoryFilter(e.target.value)}
-                            className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15] dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                            onValueChange={(value) => setCategoryFilter(value)}
                         >
-                            <option value="all">Semua Kategori</option>
-                            <option value="organisasi_hukum">Organisasi & Hukum</option>
-                            <option value="jurnal_karya_ilmiah">Jurnal & Karya Ilmiah</option>
-                            <option value="perpustakaan_digital">Perpustakaan Digital</option>
-                        </select>
+                            <SelectTrigger className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-[#FACC15] focus:outline-none focus:ring-2 focus:ring-[#FACC15] dark:border-gray-600 dark:bg-gray-800 dark:text-white w-64">
+                                <SelectValue placeholder="Semua Kategori" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">Semua Kategori</SelectItem>
+                                <SelectItem value="organisasi_hukum">Organisasi & Hukum</SelectItem>
+                                <SelectItem value="jurnal_karya_ilmiah">Jurnal & Karya Ilmiah</SelectItem>
+                                <SelectItem value="perpustakaan_digital">Perpustakaan Digital</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />

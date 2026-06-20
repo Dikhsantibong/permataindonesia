@@ -28,12 +28,30 @@ export default function Anggota() {
 
                     {/* Map and List */}
                     <div className="grid md:grid-cols-3 gap-8">
-                        <div className="md:col-span-2 bg-gray-100 rounded-xl flex items-center justify-center p-8 min-h-[400px]">
+                        <div className="relative md:col-span-2 bg-gray-100 rounded-xl flex items-center justify-center p-8 min-h-[400px]">
                             <img
                                 src={`/peta/Wilayah_${activeWilayah}_NoBG.png`}
                                 alt={`Peta Wilayah ${romanNumerals[activeWilayah - 1]}`}
                                 className="max-w-full max-h-[500px] object-contain"
                             />
+                            {/* Floating logo himpunan di atas peta (sisi bawah) */}
+                            <div className="absolute bottom-6 left-6 right-6 flex flex-wrap justify-center gap-2 bg-white/40 backdrop-blur-sm p-3 rounded-xl mx-8">
+                                {wilayahData[activeWilayah as keyof typeof wilayahData].map((himpunan, i) => (
+                                    <div key={i} className="bg-white p-1 rounded shadow-sm hover:-translate-y-1 transition-transform cursor-help" title={himpunan}>
+                                        <img 
+                                            src={`/logo-himpunan/wilayah${activeWilayah}/${himpunan}.png`} 
+                                            alt={himpunan} 
+                                            className="h-8 w-8 sm:h-10 sm:w-10 object-contain rounded" 
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                if (!target.src.includes('ui-avatars')) {
+                                                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(himpunan)}&background=FACC15&color=0B1727&bold=true&size=64`;
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         
                         <div className="flex flex-col h-[400px]">
@@ -53,12 +71,12 @@ export default function Anggota() {
                     {/* Regions Tabs */}
                     <div className="mt-12 flex flex-wrap gap-4">
                         {[1, 2, 3, 4, 5].map((wilayah) => (
-                            <button 
+                            <button
                                 key={wilayah}
                                 onClick={() => setActiveWilayah(wilayah)}
                                 className={`px-6 py-3 rounded font-bold text-sm border-2 transition-all duration-200 ${
-                                    activeWilayah === wilayah 
-                                        ? 'bg-[#FACC15] border-[#FACC15] text-[#0B1727] shadow-md scale-105' 
+                                    activeWilayah === wilayah
+                                        ? 'bg-[#FACC15] border-[#FACC15] text-[#0B1727] shadow-md scale-105'
                                         : 'bg-transparent border-gray-300 text-gray-600 hover:border-[#0B1727] hover:text-[#0B1727]'
                                 }`}
                             >
@@ -66,6 +84,7 @@ export default function Anggota() {
                             </button>
                         ))}
                     </div>
+
                 </div>
             </div>
         </FrontLayout>

@@ -41,7 +41,7 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col">
+        <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col" id="front-layout-container">
             {/* Navbar */}
             <nav className="fixed top-0 z-50 w-full bg-[#0B1727] text-white shadow-md">
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">

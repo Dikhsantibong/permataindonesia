@@ -20,18 +20,10 @@ export default function StrukturOrganisasi() {
     return (
         <FrontLayout>
             <Head title="Struktur Organisasi | Permata Indonesia" />
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 overflow-x-auto relative">
-                {/* Background Image */}
-                <div className="absolute inset-0 -z-10">
-                    <img
-                        src="/bg-anggota.png"
-                        alt="Background"
-                        className="w-full h-full object-cover"
-                    />
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-white/50 dark:bg-gray-900/90"></div>
-                </div>
-
+            <div className="relative min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: "url('/bg-anggota.png')" }}>
+                {/* Light overlay to ensure the chart is readable */}
+                <div className="absolute inset-0 bg-white/10"></div>
+                <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 overflow-x-auto relative z-10 min-h-screen">
                 <div className="min-w-[1000px] flex flex-col items-center pb-20">
                     <h1 className="text-2xl font-bold text-primary mb-8 text-center uppercase tracking-wider">
                         Struktur Organisasi
@@ -249,6 +241,7 @@ export default function StrukturOrganisasi() {
 
                     </div>
                 </div>
+            </div>
             </div>
         </FrontLayout>
     );
