@@ -190,7 +190,7 @@ export default function Anggota() {
                                                 markerRefs.current[i] = ref;
                                             }}
                                             eventHandlers={{
-                                                click: () => setActivePopupIndex(i)
+                                                click: () => ex(i)
                                             }}
                                         >
                                             <Popup className="custom-popup">
